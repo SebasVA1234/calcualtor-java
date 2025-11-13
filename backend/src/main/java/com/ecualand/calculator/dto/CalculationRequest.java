@@ -2,6 +2,7 @@ package com.ecualand.calculator.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 /**
  * DTO representing a request to calculate the final amount and commission.
@@ -14,21 +15,21 @@ public class CalculationRequest {
      * Amount the user wishes to send (value before applying commission).
      */
     @NotNull
-    @Positive(message = "Value must be positive")
+    @PositiveOrZero(message = "Value must be positive")
     private Double value;
 
     /**
      * Commission percentage to charge on the transaction (0–100).
      */
     @NotNull
-    @Positive(message = "Commission must be positive")
+    @PositiveOrZero(message = "Commission must be positive")
     private Double commission;
 
     /**
      * Fixed transactional fee (extra amount added before computing commission).
      */
     @NotNull
-    @Positive(message = "Extra fee must be positive")
+    @PositiveOrZero(message = "Extra fee must be positive")
     private Double extra;
 
     public Double getValue() {

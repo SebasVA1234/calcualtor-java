@@ -1,0 +1,202 @@
+:root{
+  --bg:#0b0f1b;
+  --bg-2:#12172a;
+  --panel:#1a2136;
+  --panel-2:#202746;
+  --text:#e7eaf3;
+  --muted:#9aa3b2;
+  --faint:#4b5563; /* Más suave para iconos/bordes */
+
+  /* Colores marca */
+  --brand-green:#8BC53F;
+  --brand-purple:#8A3F79;
+
+  --ok:#10b981;
+  --copy:#3b82f6;
+  --danger:#ef4444;
+
+  --ring: rgba(139,197,63,0.35);
+  --shadow: 0 12px 40px rgba(0,0,0,.35);
+  --radius-lg: 18px; /* Radio grande para la tarjeta */
+  --radius-md: 12px; /* Radio para botones/inputs */
+}
+
+/* Reset y Base */
+*{box-sizing:border-box}
+html{font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased;}
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 75% -100px, rgba(138,63,121,.25), transparent 70%),
+    radial-gradient(900px 450px at 15% -120px, rgba(139,197,63,.20), transparent 70%),
+    var(--bg);
+  color:var(--text);
+  font-weight: 500;
+  line-height: 1.45;
+}
+.page{
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr; /* Header auto, main 1fr */
+  place-items: center;
+  padding: 1rem;
+}
+
+/* Topbar (ajustado) */
+.topbar{
+  width: 100%;
+  max-width: 1060px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 1px;
+  padding: 0rem 0; /* <--- AUMÉNTALO UN POCO (ej: de 1rem a 1.25rem) */
+  margin-bottom: 0rem;
+  grid-row: 1;
+}
+.brand-logo{
+  height:120px; /* ¡Aquí lo hacemos más grande! De 45px a 55px */
+  width:auto;
+  /* Puedes añadir un margen a la derecha si quieres más separación del resto */
+  margin-right: 10px;
+}
+.session{display:flex; align-items:center; gap: 12px;}
+
+/* Badge + pill */
+.badge{background:rgba(139,197,63,.18); color:#dff2bf; padding:6px 10px; border-radius:999px; font-size:.85rem; border:1px solid rgba(139,197,63,.35)}
+.pill{background:linear-gradient(180deg, var(--brand-purple), #6f2e60); border:none; color:#fff; padding:8px 14px; border-radius:var(--radius-md); cursor:pointer; font-weight: 700;}
+.pill:hover{filter:brightness(1.1)}
+.hidden{display:none !important}
+
+/* Card Principal */
+.card{
+  width: 100%;
+  max-width: 700px; /* Ancho ideal para la calculadora */
+  background:linear-gradient(180deg, rgba(32,39,70,.9), rgba(26,33,54,.9));
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  grid-row: 2; /* Coloca en la segunda fila, centrado */
+  backdrop-filter: saturate(140%) blur(8px);
+}
+.card-header{margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,.06);}
+.card-title{margin:0; font-size:1.5rem; font-weight:800; color: #fff;}
+.card-subtitle{margin: 4px 0 0; color:var(--muted); font-size:1rem;}
+
+/* Formulario */
+.calc-form{display: flex; flex-direction: column; gap: 1.5rem;}
+.form-grid{display:grid; grid-template-columns:1fr; gap:1rem;}
+.field label{display:block; font-size:.9rem; color:var(--muted); margin-bottom: 8px; font-weight: 700;}
+
+/* Nuevo: Grupo de Input con Icono */
+.input-group{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-group svg{
+  position: absolute;
+  left: 14px;
+  color: var(--faint);
+  pointer-events: none; /* El icono no se puede clickear */
+}
+.input-group input{
+  width:100%;
+  padding: 14px 14px 14px 44px; /* Padding izquierdo para el icono */
+  border-radius: var(--radius-md);
+  border:1px solid rgba(255,255,255,.08);
+  background: var(--panel);
+  color: var(--text);
+  outline: 0;
+  transition:.2s all ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.input-group input:focus{
+  border-color: var(--brand-green);
+  background: var(--bg-2);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+.input-group input::placeholder{color: var(--faint);}
+
+/* Botones */
+.actions{display:flex; gap:12px; align-items:center; flex-wrap: wrap;}
+.btn{
+  border:none;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+.btn-primary{
+  flex: 1; /* Ocupa el espacio disponible */
+  background:linear-gradient(90deg, var(--brand-green), #44d06f);
+  color:#0a1a10;
+  min-width: 150px;
+}
+.btn-primary:hover{filter:brightness(1.05); transform: scale(1.02);}
+.btn-secondary{
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,.1);
+}
+.btn-secondary:hover{background: var(--panel); border-color: var(--copy);}
+
+/* Resultados (Mejorado) */
+.result{
+  margin-top: 1.5rem;
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+.result-row{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem;
+  border-bottom: 1px dashed rgba(255,255,255,.08);
+}
+.result-row:last-child{border-bottom:0;}
+.result-label{font-size: 1rem; color: var(--muted); font-weight: 500;}
+.result-value{font-weight: 700; color: #fff; font-size: 1.5rem;}
+/* Estilo especial para el Total */
+.result-row.total{
+  background: rgba(139,197,63,.1);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.result-row.total .result-label{font-size: 1.1rem; color: var(--brand-green); font-weight: 700;}
+.result-row.total .result-total-value{font-size: 2.25rem; font-weight: 800; color: #fff;}
+.error{color:var(--danger); margin:12px 0 0; text-align: center;}
+
+/* Modal (casi sin cambios, solo limpieza) */
+.modal{position:fixed; inset:0; display:grid; place-items:center; background:rgba(3,7,18,.8); backdrop-filter: blur(4px);}
+.modal-card{width:min(420px, 90%); background:var(--panel-2); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius-lg); padding:1.5rem; box-shadow: var(--shadow);}
+.modal-card h2{margin-top: 0; text-align: center; font-weight: 800;}
+.vstack{display:flex; flex-direction:column; gap:12px;}
+.vstack input{
+  padding:12px 14px;
+  border-radius:var(--radius-md);
+  border:1px solid rgba(255,255,255,.12);
+  background:var(--panel);
+  color:var(--text);
+  font-size: 1rem;
+}
+.vstack input:focus{border-color: var(--brand-green); box-shadow: 0 0 0 4px var(--ring);}
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+
+/* ===== Media Query para Desktop ===== */
+@media (min-width: 768px) {
+  .page{padding: 2rem;}
+  .card{padding: 2rem;}
+  .form-grid{
+    grid-template-columns: 1fr 1fr; /* Vuelve a las 2 columnas */
+    gap: 1.5rem;
+  }
+  .span-2{grid-column:1/-1;} /* El span funciona igual */
+}
