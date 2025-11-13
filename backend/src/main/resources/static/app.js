@@ -98,9 +98,17 @@ loginForm?.addEventListener("submit", async (e)=>{
 
 logoutBtn?.addEventListener("click", ()=>{
   clearAuthHeader();
-  updateSessionUI();
+  updateSessionUI();      // oculta el botón de logout y actualiza el badge
+  if (loginForm) {
+    loginForm.reset();
+    const userInput = qs('#username');
+    const passInput = qs('#password');
+    if (userInput) userInput.value = '';
+    if (passInput) passInput.value = '';
+  }
   show(loginModal);
 });
+
 
 /* ==========
    Cálculo
